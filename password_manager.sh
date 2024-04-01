@@ -9,7 +9,7 @@ do
 	           read -p "パスワードを入力してください:" Password
 	           echo "$ServiceName:$UserName:$Password" >> password.txt;;
     "Get Password")read -p "サービス名を入力してください:" Service
-		   RESULT=$(grep "\b$Service" password.txt)
+		   RESULT=$(grep -E "^$Service:" password.txt)
 		   IFS=":"
                    set -- $RESULT
 		   echo "サービス名：$1"
