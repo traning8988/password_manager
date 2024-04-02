@@ -36,8 +36,8 @@ do
 				   gpg -e -r s02178906@gmail.com password.txt
 		   		   echo "パスワードの追加は成功しました。"
 				   rm password.txt;;
-    "Get Password")gpg -d --batch password.txt.gpg > password.txt 2> /dev/null
-		   		   read -p "サービス名を入力してください:" Service
+    "Get Password")read -p "サービス名を入力してください:" Service
+				   gpg -d --batch password.txt.gpg > password.txt 2> /dev/null
 				   RESULT=$(grep -E "^$Service:" password.txt)
 					 if [ -n "$RESULT" ]; then
 					   IFS=":"
