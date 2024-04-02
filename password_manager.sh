@@ -30,15 +30,15 @@ do
 					   break
 				     fi
 				   done
-				   gpg --pinentry-mode loopback password.txt.gpg 2> /dev/null
-	               rm password.txt.gpg
+				   gpg -d --batch password.txt.gpg > password.txt 2> /dev/null
+				   rm password.txt.gpg
 				   echo "$ServiceName:$UserName:$Password" >> password.txt
 				   gpg -e -r s02178906@gmail.com password.txt
 		   		   echo "パスワードの追加は成功しました。"
 				   rm password.txt;;
-    "Get Password")gpg --pinentry-mode loopback password.txt.gpg 2> /dev/null
+    "Get Password")gpg -d --batch password.txt.gpg > password.txt 2> /dev/null
 		   		   read -p "サービス名を入力してください:" Service
-		   		   RESULT=$(grep -E "^$Service:" password.txt)
+				   RESULT=$(grep -E "^$Service:" password.txt)
 					 if [ -n "$RESULT" ]; then
 					   IFS=":"
 					   set -- $RESULT
